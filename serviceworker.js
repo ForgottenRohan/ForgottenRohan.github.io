@@ -1,9 +1,7 @@
 const CACHE_NAME = 'todo-pwa-cache-v1';
 const urlsToCache = [
-  '/List.html',
-  '/styles.css', // Если есть отдельный файл стилей
-  '/script.js',  // Если есть отдельный файл скриптов
-  '/icon.png'
+  '/index.html',  // Если есть отдельный файл скриптов
+  '/icons.json'
 ];
 
 self.addEventListener('install', (event) => {

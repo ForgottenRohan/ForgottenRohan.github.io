@@ -1,7 +1,7 @@
 {
   "name": "ToDo List PWA",
   "short_name": "ToDo",
-  "start_url": "/List.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4CAF50",
