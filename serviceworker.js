@@ -1,19 +1,24 @@
-const CACHE_NAME = 'todo-pwa-cache-v1';
-const urlsToCache = [
-  '/index.html',  // Если есть отдельный файл скриптов
-  '/icons.json'
+const staticCacheName = 's-app-v1';
+
+const assetUrls = [
+    'index.html'
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
-  );
+self.addEventListener('install', async event => {
+    const cache = await caches.open(staticCacheName);
+    await cache.addAll(assetUrls);
 });
 
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => response || fetch(event.request))
-  );
+self.addEventListener('activate', event => {
+    console.log('[SW]: activate');
 });
+
+self.addEventListener('fetch', event => {
+    console.log('Fetch', event.request.url);
+    event.respondWith(cacheFirst(event.request));
+});
+
+async function cacheFirst(request) {
+    const cached = await caches.match(request);
+    return cached ?? await fetch(request);
+}
